@@ -647,7 +647,7 @@ type Num = number;
 
 When `Flatten` is given an array type, it uses an indexed access with `number` to fetch out `string[]`’s element type. Otherwise, it just returns the type it was given.
 
-#### **17.Inferring Within Conditional Types **
+#### **17.Inferring Within Conditional Types**
 
 We just found ourselves using conditional types to apply constraints and then extract out types. This ends up being such a common operation that conditional types make it easier.
 
@@ -736,7 +736,7 @@ type User = {
 
 ```
 
-#### **18 Key Remapping via `as` **
+#### **18 Key Remapping via `as`**
 
 In TypeScript 4.1 and onwards, you can re-map keys in mapped types with an `as` clause in a mapped type:
 
@@ -805,7 +805,7 @@ type Config = {
 };
 ```
 
-#### **19.`readonly` **
+#### **19.`readonly`**
 
 Fields may be prefixed with the `readonly` modifier. This prevents assignments to the field outside of the constructor.
 
@@ -825,7 +825,7 @@ Cannot assign to 'name' because it is a read-only property.Cannot assign to 'nam
 
 ```
 
-#### **20.Constructors **
+#### **20.Constructors**
 
 > Background Reading:
 >
@@ -865,7 +865,7 @@ There are just a few differences between class constructor signatures and functi
 - Constructors can’t have type parameters - these belong on the outer class declaration, which we’ll learn about later
 - Constructors can’t have return type annotations - the class instance type is always what’s returned
 
-#### **21.Super Calls **
+#### **21.Super Calls**
 
 Just as in JavaScript, if you have a base class, you’ll need to call `super();` in your constructor body before using any `this.` members:
 
@@ -887,7 +887,7 @@ class Derived extends Base {
 
 Forgetting to call `super` is an easy mistake to make in JavaScript, but TypeScript will tell you when it’s necessary.
 
-#### **22 TypeScript has some special inference rules for accessors: **
+#### **22 TypeScript has some special inference rules for accessors:**
 
 - If `get` exists but no `set`, the property is automatically `readonly`
 - If the type of the setter parameter is not specified, it is inferred from the return type of the getter
@@ -917,11 +917,11 @@ class Thing {
 }
 ```
 
-#### **23 Class Heritage **
+#### **23 Class Heritage**
 
 Like other languages with object-oriented features, classes in JavaScript can inherit from base classes.
 
-#### **24.`implements` Clauses **
+#### **24.`implements` Clauses**
 
 You can use an `implements` clause to check that a class satisfies a particular `interface`. An error will be issued if a class fails to correctly implement it:
 
@@ -949,7 +949,7 @@ Class 'Ball' incorrectly implements interface 'Pingable'.
 
 Classes may also implement multiple interfaces, e.g. `class C implements A, B {`.
 
-#### **25.Cautions **
+#### **25.Cautions**
 
 It’s important to understand that an `implements` clause is only a check that the class can be treated as the interface type. It doesn’t change the type of the class or its methods *at all*. A common source of error is to assume that an `implements` clause will change the class type - it doesn’t!
 
@@ -986,7 +986,7 @@ Property 'y' does not exist on type 'C'.Property 'y' does not exist on type 'C'.
 
 ```
 
-#### **26.`extends` Clauses **
+#### **26.`extends` Clauses**
 
 > Background Reading:
 >
@@ -1016,7 +1016,7 @@ d.move();
 d.woof(3);
 ```
 
-#### **27.Overriding Methods **
+#### **27.Overriding Methods**
 
 > Background Reading:
 >
@@ -1094,7 +1094,7 @@ console.log(b.x);
 Property 'x' is private and only accessible within class 'Base'.
 ```
 
-#### **28.Cross-instance `private` access **
+#### **28.Cross-instance `private` access**
 
 Different OOP languages disagree about whether different instances of the same class may access each others’ `private` members. While languages like Java, C#, C++, Swift, and PHP allow this, Ruby does not.
 
@@ -1111,7 +1111,7 @@ class A {
 }
 ```
 
-#### **29.Caveats **
+#### **29.Caveats**
 
 This means that JavaScript runtime constructs like `in` or simple property lookup can still access a `private` or `protected` member:
 
@@ -1301,7 +1301,7 @@ Property 'z' is private and only accessible within class 'Params'.
 
 ```
 
-#### **32 Class Expressions **
+#### **32 Class Expressions**
 
 > Background Reading:
 >
@@ -1321,7 +1321,7 @@ const m = new someClass("Hello, world");
 const m: someClass<string>;
 ```
 
-#### **33 Constructor Signatures **
+#### **33 Constructor Signatures**
 
 JavaScript classes are instantiated with the `new` operator. Given the type of a class itself, the [InstanceType](https://www.typescriptlang.org/docs/handbook/utility-types.html#instancetypetype) utility type models this operation.
 
@@ -1347,7 +1347,7 @@ moveRight(point);
 point.x; // => 8
 ```
 
-#### **34 `abstract` Classes and Members **
+#### **34 `abstract` Classes and Members**
 
 Classes, methods, and fields in TypeScript may be *abstract*.
 

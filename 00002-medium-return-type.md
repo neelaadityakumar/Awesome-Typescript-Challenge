@@ -14,9 +14,15 @@ type a = MyReturnType<typeof fn>; // should be "1 | 2"
 Solution:
 
 ```ts
+1;
 type MyReturnType<T extends (...args: any) => any> = T extends (
   ...args: any
 ) => infer R
+  ? R
+  : never;
+
+2;
+type MyReturnType<T extends Function> = T extends (...args: any) => infer R
   ? R
   : never;
 ```

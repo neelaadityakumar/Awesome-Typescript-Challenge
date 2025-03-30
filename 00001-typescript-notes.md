@@ -132,7 +132,7 @@ The types of `longerArray` and `longerString` were inferred based on the arg
 
 Finally, just as we’d like, the call to `longest(10, 100)` is rejected because the `number` type doesn’t have a `.length` property.
 
-### Working with Constrained Values
+#### **5.Working with Constrained Values**
 
 Here’s a common error when working with generic constraints:
 
@@ -163,9 +163,7 @@ const arr = minimumLength([1, 2, 3], 6);
 console.log(arr.slice(0));
 ```
 
-###
-
-## Function Overloads
+#### **6. Function Overloads**
 
 Some JavaScript functions can be called in a variety of argument counts and types. For example, you might write a function to produce a `Date` that takes either a timestamp (one argument) or a month/day/year specification (three arguments).
 
@@ -188,7 +186,7 @@ No overload expects 2 arguments, but overloads do exist that expect either 1 or 
 
 ```
 
-### `unknown`
+#### **7.`unknown`**
 
 The `unknown` type represents *any* value. This is similar to the `any` type, but is safer because it’s not legal to do anything with an `unknown` value:
 
@@ -216,7 +214,7 @@ function safeParse(s: string): unknown {
 const obj = safeParse(someRandomString);
 ```
 
-### `never`
+#### **8.`never`**
 
 Some functions *never* return a value:
 
@@ -242,9 +240,7 @@ function fn(x: string | number) {
 }
 ```
 
-###
-
-### `Function`
+#### **9.`Function`**
 
 The global type `Function` describes properties like `bind`, `call`, `apply`, and others present on all function values in JavaScript. It also has the special property that values of type `Function` can always be called; these calls return `any`:
 
@@ -278,7 +274,7 @@ const args = [8, 5] as const;
 const angle = Math.atan2(...args);
 ```
 
-### Return type `void`
+#### **10.Return type `void`**
 
 The `void` return type for functions can produce some unusual, but expected behavior.
 
@@ -356,7 +352,7 @@ The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable
 
 ```
 
-### Tuple Types
+#### **11.Tuple Types**
 
 If we try to index past the number of elements, we’ll get an error.
 
@@ -425,9 +421,7 @@ Just as with interface, putting the type parameter on the class itself lets us m
 
 As we cover in [our section on classes](https://www.typescriptlang.org/docs/handbook/2/classes.html), a class has two sides to its type: the static side and the instance side. Generic classes are only generic over their instance side rather than their static side, so when working with classes, static members can not use the class’s type parameter.
 
-##
-
-## Generic Constraints
+#### **12 Generic Constraints**
 
 If you remember from an earlier example, you may sometimes want to write a generic function that works on a set of types where you have *some* knowledge about what capabilities that set of types will have. In our `loggingIdentity` example, we wanted to be able to access the `.length` property of `arg`, but the compiler could not prove that every type had a `.length` property, so it warns us that we can’t make this assumption.
 
@@ -455,7 +449,7 @@ function loggingIdentity<Type extends Lengthwise>(arg: Type): Type {
 }
 ```
 
-## Using Type Parameters in Generic Constraints
+#### **13 Using Type Parameters in Generic Constraints**
 
 You can declare a type parameter that is constrained by another type parameter. For example, here we’d like to get a property from an object given its name. We’d like to ensure that we’re not accidentally grabbing a property that does not exist on the `obj`, so we’ll place a constraint between the two types:
 
@@ -472,7 +466,7 @@ Argument of type '"m"' is not assignable to parameter of type '"a" | "b" | "c" |
 
 ```
 
-## Using Class Types in Generics
+#### **14 Using Class Types in Generics**
 
 When creating factories in TypeScript using generics, it is necessary to refer to class types by their constructor functions. For example,
 
@@ -516,9 +510,7 @@ createInstance(Bee).keeper.hasMask;
 
 This pattern is used to power the [mixins](https://www.typescriptlang.org/docs/handbook/mixins.html) design pattern.
 
-##
-
-## Generic Parameter Defaults
+#### **15 Generic Parameter Defaults**
 
 By declaring a default for a generic type parameter, you make it optional to specify the corresponding type argument. For example, a function which creates a new `HTMLElement`. Calling the function with no arguments generates a `HTMLDivElement`; calling the function with an element as the first argument generates an element of the argument’s type. You can optionally pass a list of children as well. Previously you would have to define the function as:
 
@@ -529,7 +521,6 @@ declare function create<T extends HTMLElement, U extends HTMLElement>(
   element: T,
   children: U[]
 ): Container<T, U[]>;
-ts;
 ```
 
 With generic parameter defaults we can reduce it to:
@@ -546,7 +537,7 @@ const p = create(new HTMLParagraphElement());
 const p: Container<HTMLParagraphElement, HTMLParagraphElement[]>;
 ```
 
-## The `keyof` type operator
+#### **16 The `keyof` type operator**
 
 The `keyof` operator takes an object type and produces a string or numeric literal union of its keys. The following type `P` is the same type as `type P = "x" | "y"`:
 
@@ -656,7 +647,7 @@ type Num = number;
 
 When `Flatten` is given an array type, it uses an indexed access with `number` to fetch out `string[]`’s element type. Otherwise, it just returns the type it was given.
 
-### Inferring Within Conditional Types
+#### **17.Inferring Within Conditional Types **
 
 We just found ourselves using conditional types to apply constraints and then extract out types. This ends up being such a common operation that conditional types make it easier.
 
@@ -745,7 +736,7 @@ type User = {
 
 ```
 
-## Key Remapping via `as`
+#### **18 Key Remapping via `as` **
 
 In TypeScript 4.1 and onwards, you can re-map keys in mapped types with an `as` clause in a mapped type:
 
@@ -814,7 +805,7 @@ type Config = {
 };
 ```
 
-### `readonly`
+#### **19.`readonly` **
 
 Fields may be prefixed with the `readonly` modifier. This prevents assignments to the field outside of the constructor.
 
@@ -834,7 +825,7 @@ Cannot assign to 'name' because it is a read-only property.Cannot assign to 'nam
 
 ```
 
-### Constructors
+#### **20.Constructors **
 
 > Background Reading:
 >
@@ -874,7 +865,7 @@ There are just a few differences between class constructor signatures and functi
 - Constructors can’t have type parameters - these belong on the outer class declaration, which we’ll learn about later
 - Constructors can’t have return type annotations - the class instance type is always what’s returned
 
-### Super Calls
+#### **21.Super Calls **
 
 Just as in JavaScript, if you have a base class, you’ll need to call `super();` in your constructor body before using any `this.` members:
 
@@ -896,9 +887,7 @@ class Derived extends Base {
 
 Forgetting to call `super` is an easy mistake to make in JavaScript, but TypeScript will tell you when it’s necessary.
 
-###
-
-TypeScript has some special inference rules for accessors:
+#### **22 TypeScript has some special inference rules for accessors: **
 
 - If `get` exists but no `set`, the property is automatically `readonly`
 - If the type of the setter parameter is not specified, it is inferred from the return type of the getter
@@ -928,13 +917,11 @@ class Thing {
 }
 ```
 
-###
-
-## Class Heritage
+#### **23 Class Heritage **
 
 Like other languages with object-oriented features, classes in JavaScript can inherit from base classes.
 
-### `implements` Clauses
+#### **24.`implements` Clauses **
 
 You can use an `implements` clause to check that a class satisfies a particular `interface`. An error will be issued if a class fails to correctly implement it:
 
@@ -962,9 +949,7 @@ Class 'Ball' incorrectly implements interface 'Pingable'.
 
 Classes may also implement multiple interfaces, e.g. `class C implements A, B {`.
 
-###
-
-### Cautions
+#### **25.Cautions **
 
 It’s important to understand that an `implements` clause is only a check that the class can be treated as the interface type. It doesn’t change the type of the class or its methods *at all*. A common source of error is to assume that an `implements` clause will change the class type - it doesn’t!
 
@@ -1001,7 +986,7 @@ Property 'y' does not exist on type 'C'.Property 'y' does not exist on type 'C'.
 
 ```
 
-### `extends` Clauses
+#### **26.`extends` Clauses **
 
 > Background Reading:
 >
@@ -1031,7 +1016,7 @@ d.move();
 d.woof(3);
 ```
 
-### Overriding Methods
+#### **27.Overriding Methods **
 
 > Background Reading:
 >
@@ -1109,7 +1094,7 @@ console.log(b.x);
 Property 'x' is private and only accessible within class 'Base'.
 ```
 
-### Cross-instance `private` access
+#### **28.Cross-instance `private` access **
 
 Different OOP languages disagree about whether different instances of the same class may access each others’ `private` members. While languages like Java, C#, C++, Swift, and PHP allow this, Ruby does not.
 
@@ -1126,7 +1111,7 @@ class A {
 }
 ```
 
-### Caveats
+#### **29.Caveats **
 
 This means that JavaScript runtime constructs like `in` or simple property lookup can still access a `private` or `protected` member:
 
@@ -1196,7 +1181,7 @@ If you need to protect values in your class from malicious actors, you should us
 
 ```
 
-## Static Members
+#### **30 Static Members**
 
 > Background Reading:
 >
@@ -1295,7 +1280,7 @@ Static members cannot reference class type parameters.
 
 Remember that types are always fully erased! At runtime, there’s only one Box.defaultValue property slot. This means that setting Box<string>.defaultValue (if that were possible) would also change Box<number>.defaultValue - not good. The static members of a generic class can never refer to the class’s type parameters.
 
-## Parameter Properties
+#### **31 Parameter Properties**
 
 TypeScript offers special syntax for turning a constructor parameter into a class property with the same name and value. These are called *parameter properties* and are created by prefixing a constructor argument with one of the visibility modifiers `public`, `private`, `protected`, or `readonly`. The resulting field gets those modifier(s):
 
@@ -1316,7 +1301,7 @@ Property 'z' is private and only accessible within class 'Params'.
 
 ```
 
-## Class Expressions
+#### **32 Class Expressions **
 
 > Background Reading:
 >
@@ -1336,9 +1321,7 @@ const m = new someClass("Hello, world");
 const m: someClass<string>;
 ```
 
-##
-
-## Constructor Signatures
+#### **33 Constructor Signatures **
 
 JavaScript classes are instantiated with the `new` operator. Given the type of a class itself, the [InstanceType](https://www.typescriptlang.org/docs/handbook/utility-types.html#instancetypetype) utility type models this operation.
 
@@ -1364,7 +1347,7 @@ moveRight(point);
 point.x; // => 8
 ```
 
-## `abstract` Classes and Members
+#### **34 `abstract` Classes and Members **
 
 Classes, methods, and fields in TypeScript may be *abstract*.
 
